@@ -317,6 +317,10 @@ class WC_WooMercadoPago_Helpers_CurrencyConverter
      */
     public function scheduleNotice(WC_WooMercadoPago_PaymentAbstract $method, $oldData, $newData)
     {
+//        if (!isset($oldData[self::CONFIG_KEY) || !isset($newData[self::CONFIG_KEY) {
+//            return;
+//        }
+
         if ($oldData[self::CONFIG_KEY] != $newData[self::CONFIG_KEY]) {
             $_SESSION[self::CONFIG_KEY]['notice'] = array(
                 'type'   => $newData[self::CONFIG_KEY] == 'yes' ? 'enabled' : 'disabled',
