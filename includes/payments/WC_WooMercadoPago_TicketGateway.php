@@ -40,6 +40,7 @@ class WC_WooMercadoPago_TicketGateway extends WC_WooMercadoPago_PaymentAbstract
         $this->form_fields = $this->getFormFields('Ticket');
         $this->hook = new WC_WooMercadoPago_Hook_Ticket($this);
         $this->notification = new WC_WooMercadoPago_Notification_Webhook($this);
+        $this->currency_convertion = true;
     }
 
     /**
@@ -368,11 +369,10 @@ class WC_WooMercadoPago_TicketGateway extends WC_WooMercadoPago_PaymentAbstract
         $amount = $amount - $discount + $comission;
 
         $logged_user_email = (wp_get_current_user()->ID != 0) ? wp_get_current_user()->user_email : null;
-        $discount_action_url = get_site_url() . '/index.php/woocommerce-mercadopago/?wc-api=WC_WooMercadoPago_TicketGateway';
-        $address = get_user_meta(wp_get_current_user()->ID, 'shipping_address_1', true);
-        $address_2 = get_user_meta(wp_get_current_user()->ID, 'shipping_address_2', true);
+        $address = get_user_meta(wp_get_current_user()->ID, 'billing_address_1', true);
+        $address_2 = get_user_meta(wp_get_current_user()->ID, 'billing_address_2', true);
         $address .= (!empty($address_2) ? ' - ' . $address_2 : '');
-        $country = get_user_meta(wp_get_current_user()->ID, 'shipping_country', true);
+        $country = get_user_meta(wp_get_current_user()->ID, 'billing_country', true);
         $address .= (!empty($country) ? ' - ' . $country : '');
 
         $parameters = array(
@@ -380,9 +380,8 @@ class WC_WooMercadoPago_TicketGateway extends WC_WooMercadoPago_PaymentAbstract
             'payment_methods' => $this->activated_payment,
             'site_id' => $this->getOption('_site_id_v1'),
             'coupon_mode' => isset($logged_user_email) ? $this->coupon_mode : 'no',
-            'discount_action_url' => $discount_action_url,
+            'discount_action_url' => $this->discount_action_url,
             'payer_email' => $logged_user_email,
-            'images_path' => plugins_url('../assets/images/', plugin_dir_path(__FILE__)),
             'currency_ratio' => WC_WooMercadoPago_Helpers_CurrencyConverter::getInstance()->ratio($this),
             'woocommerce_currency' => get_woocommerce_currency(),
             'account_currency' => $this->site_data['currency'],
@@ -393,9 +392,9 @@ class WC_WooMercadoPago_TicketGateway extends WC_WooMercadoPago_PaymentAbstract
                     'docNumber' => '',
                     'address' => $address,
                     'number' => '',
-                    'city' => get_user_meta(wp_get_current_user()->ID, 'shipping_city', true),
-                    'state' => get_user_meta(wp_get_current_user()->ID, 'shipping_state', true),
-                    'zipcode' => get_user_meta(wp_get_current_user()->ID, 'shipping_postcode', true)
+                    'city' => get_user_meta(wp_get_current_user()->ID, 'billing_city', true),
+                    'state' => get_user_meta(wp_get_current_user()->ID, 'billing_state', true),
+                    'zipcode' => get_user_meta(wp_get_current_user()->ID, 'billing_postcode', true)
                 ) :
                 array(
                     'firstname' => '',
@@ -407,7 +406,7 @@ class WC_WooMercadoPago_TicketGateway extends WC_WooMercadoPago_PaymentAbstract
                     'state' => '',
                     'zipcode' => '',
                 ),
-            'path_to_javascript' => plugins_url('../assets/js/ticket.js', plugin_dir_path(__FILE__))
+            'images_path' => plugins_url('../assets/images/', plugin_dir_path(__FILE__)),
         );
 
         wc_get_template('checkout/ticket_checkout.php', $parameters, 'woo/mercado/pago/module/', WC_WooMercadoPago_Module::get_templates_path());

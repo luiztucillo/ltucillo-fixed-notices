@@ -22,9 +22,7 @@ class WC_WooMercadoPago_CustomGateway extends WC_WooMercadoPago_PaymentAbstract
         if (!$this->validateSection()) {
             return;
         }
-
         $this->desc = __('Accept card payments on your website with the best possible financing and maximize the conversion of your business. With personalized checkout your customers pay without leaving your store!', 'woocommerce-mercadopago');
-
         $this->form_fields = array();
         $this->method_title = __('Mercado Pago - Custom Checkout', 'woocommerce-mercadopago');
         $this->title = __('Pay with debit and credit cards', 'woocommerce-mercadopago');
@@ -33,11 +31,10 @@ class WC_WooMercadoPago_CustomGateway extends WC_WooMercadoPago_PaymentAbstract
         $this->field_forms_order = $this->get_fields_sequence();
         parent::__construct();
         $this->form_fields = $this->getFormFields('Custom');
-        $this->logged_user_email = (wp_get_current_user()->ID != 0) ? wp_get_current_user()->user_email : null;
         $this->customer = isset($this->logged_user_email) ? $this->mp->get_or_create_customer($this->logged_user_email) : null;
-        $this->discount_action_url = get_site_url() . '/index.php/woocommerce-mercadopago/?wc-api=' . get_class($this);
         $this->hook = new WC_WooMercadoPago_Hook_Custom($this);
         $this->notification = new WC_WooMercadoPago_Notification_Webhook($this);
+        $this->currency_convertion = true;
     }
 
     /**
@@ -308,11 +305,9 @@ class WC_WooMercadoPago_CustomGateway extends WC_WooMercadoPago_PaymentAbstract
             'discount_action_url' => $this->discount_action_url,
             'payer_email' => $this->logged_user_email,
             'images_path' => plugins_url('../assets/images/', plugin_dir_path(__FILE__)),
-            'banner_path' => $banner_url,
             'currency_ratio' => WC_WooMercadoPago_Helpers_CurrencyConverter::getInstance()->ratio($this),
             'woocommerce_currency' => get_woocommerce_currency(),
             'account_currency' => $this->site_data['currency'],
-            'path_to_javascript' => plugins_url('../assets/js/credit-card.js', plugin_dir_path(__FILE__)),
             'debit_card' => $debit_card,
             'credit_card' => $credit_card,
         );
@@ -530,9 +525,22 @@ class WC_WooMercadoPago_CustomGateway extends WC_WooMercadoPago_PaymentAbstract
         return true;
     }
 
-	/**
-	 * @return string
-	 */
+    /**
+     * @return array|mixed|null
+     * @throws WC_WooMercadoPago_Exception
+     */
+    public function getOrCreateCustomer()
+    {
+        if(empty($this->mp))
+        {
+            return null;
+        }
+        return isset($this->logged_user_email) ? $this->mp->get_or_create_customer($this->logged_user_email) : null;
+    }
+
+    /**
+     * @return string
+     */
     public static function getId(){
         return WC_WooMercadoPago_CustomGateway::ID;
     }

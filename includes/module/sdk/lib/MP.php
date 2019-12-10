@@ -251,7 +251,6 @@ class MP
 	}
 
 	//=== COUPOM AND DISCOUNTS FUNCTIONS ===
-
 	/**
 	 * @param $transaction_amount
 	 * @param $payer_email
@@ -261,7 +260,6 @@ class MP
 	 */
 	public function check_discount_campaigns($transaction_amount, $payer_email, $coupon_code)
 	{
-
 		$request = array(
 			'uri' => '/discount_campaigns',
 			'params' => array(
@@ -271,10 +269,8 @@ class MP
 				'coupon_code' => $coupon_code
 			)
 		);
-
 		$discount_info = MPRestClient::get($request);
 		return $discount_info;
-
 	}
 
 	//=== CHECKOUT AUXILIARY FUNCTIONS ===

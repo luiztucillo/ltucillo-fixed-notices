@@ -78,6 +78,9 @@ class WC_WooMercadoPago_PaymentAbstract extends WC_Payment_Gateway
     public $homolog_validate;
     public $clientid_old_version;
     public $desc;
+    public $customer;
+    public $logged_user_email;
+    public $currency_convertion;
 
     /**
      * WC_WooMercadoPago_PaymentAbstract constructor.
@@ -96,7 +99,7 @@ class WC_WooMercadoPago_PaymentAbstract extends WC_Payment_Gateway
         $this->mp_category_id = $this->getOption('_mp_category_id', 0);
         $this->store_identificator = $this->getOption('_mp_store_identificator', 'WC-');
         $this->debug_mode = $this->getOption('_mp_debug_mode', 'no');
-        $this->custom_domain = $this->getOption('_mp_custom_domain');
+        $this->custom_domain = $this->getOption('_mp_custom_domain', '');
         $this->binary_mode = $this->getOption('binary_mode', 'no');
         $this->gateway_discount = $this->getOption('gateway_discount', 0);
         $this->commission = $this->getOption('commission', 0);
@@ -108,6 +111,8 @@ class WC_WooMercadoPago_PaymentAbstract extends WC_Payment_Gateway
         $this->mp = $this->getMpInstance();
         $this->homolog_validate = $this->getHomologValidate();
         $this->application_id = $this->getApplicationId($this->mp_access_token_prod);
+        $this->logged_user_email = (wp_get_current_user()->ID != 0) ? wp_get_current_user()->user_email : null;
+        $this->discount_action_url = get_site_url() . '/index.php/woocommerce-mercadopago/?wc-api=' . get_class($this);
     }
 
     /**
@@ -234,7 +239,7 @@ class WC_WooMercadoPago_PaymentAbstract extends WC_Payment_Gateway
             <div class="left-header">
                 <img src="' . plugins_url('../assets/images/mplogo.png', plugin_dir_path(__FILE__)) . '">
             </div>
-            <div class="right-header">
+            <div>
                 <strong>' . $description . '</strong>
             </div>
         </div>';
@@ -1013,8 +1018,8 @@ class WC_WooMercadoPago_PaymentAbstract extends WC_Payment_Gateway
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function field_coupon_mode()
     {
         return array(
@@ -1265,5 +1270,13 @@ class WC_WooMercadoPago_PaymentAbstract extends WC_Payment_Gateway
                 update_option($key, apply_filters('woocommerce_settings_api_sanitized_fields_' . $gateway::getId(), $options));
             }
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCurrencyConvertable()
+    {
+        return $this->currency_convertion;
     }
 }
