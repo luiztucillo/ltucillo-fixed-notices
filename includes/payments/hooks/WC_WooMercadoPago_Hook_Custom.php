@@ -17,9 +17,8 @@ class WC_WooMercadoPago_Hook_Custom extends WC_WooMercadoPago_Hook_Abstract
     public function loadHooks()
     {
         parent::loadHooks();
-        add_action('wp_enqueue_scripts', array($this, 'add_checkout_scripts'));
-
         if (!empty($this->payment->settings['enabled']) && $this->payment->settings['enabled'] == 'yes') {
+            add_action('wp_enqueue_scripts', array($this, 'add_checkout_scripts_custom'));
             add_action('woocommerce_after_checkout_form', array($this, 'add_mp_settings_script_custom'));
             add_action('woocommerce_thankyou', array($this, 'update_mp_settings_script_custom'));
         }
@@ -30,14 +29,8 @@ class WC_WooMercadoPago_Hook_Custom extends WC_WooMercadoPago_Hook_Abstract
      */
     public function add_discount()
     {
-        if (!isset($_POST['mercadopago_custom'])) {
-            return;
-        }
-        if (is_admin() && !defined('DOING_AJAX') || is_cart()) {
-            return;
-        }
-        $custom_checkout = $_POST['mercadopago_custom'];
-        parent::add_discount_abst($custom_checkout);
+        parent::add_discount_abst();
+        return;
     }
 
     /**
@@ -50,6 +43,33 @@ class WC_WooMercadoPago_Hook_Custom extends WC_WooMercadoPago_Hook_Abstract
         return $updateOptions;
     }
 
+    /**
+     * Add Checkout Scripts
+     */
+    public function add_checkout_scripts_custom()
+    {
+        if (is_checkout() && $this->payment->is_available() && !get_query_var('order-received')) {
+            wp_enqueue_script('mercado-pago-module-custom-js', 'https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js');
+            wp_enqueue_script('woocommerce-mercadopago-checkout', plugins_url('../../assets/js/credit-card.js', plugin_dir_path(__FILE__)), array('jquery'), null, true);
+
+            wp_localize_script(
+                'woocommerce-mercadopago-checkout',
+                'wc_mercadopago_params',
+                array(
+                    'site_id'     => $this->payment->getOption('_site_id_v1'),
+                    'public_key'  => $this->payment->getPublicKey(),
+                    'payer_email' => $this->payment->logged_user_email,
+                    'apply'       => __('Apply', 'woocommerce-mercadopago'),
+                    'remove'      => __('Remove', 'woocommerce-mercadopago'),
+                    'choose'      => __('To choose', 'woocommerce-mercadopago'),
+                    'other_bank'  => __('Other bank', 'woocommerce-mercadopago'),
+                    'loading'     => plugins_url('../../assets/images/', plugin_dir_path(__FILE__)) . 'loading.gif',
+                    'check'       => plugins_url('../../assets/images/', plugin_dir_path(__FILE__)) . 'check.png',
+                    'error'       => plugins_url('../../assets/images/', plugin_dir_path(__FILE__)) . 'error.png'
+                )
+            );
+        }
+    }
 
     /**
      *

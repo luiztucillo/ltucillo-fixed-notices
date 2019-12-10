@@ -38,25 +38,10 @@ class WC_WooMercadoPago_PreferenceCustom extends WC_WooMercadoPago_PreferenceAbs
         $this->preference['additional_info']['items'] = $this->items;
         $this->preference['additional_info']['payer'] = $this->get_payer_custom();
         $this->preference['additional_info']['shipments'] = $this->shipments_receiver_address();
-        if ($this->ship_cost > 0) {
-            $shipCost = $this->ship_cost_item();
-            $this->preference['additional_info']['items'][] = $shipCost;
-            if (isset($shipCost['unit_price']) && $shipCost['unit_price'] > 0) {
-                $sumTransaction = $this->preference['transaction_amount'] + $shipCost['unit_price'];
-            }
-        }
-        if (
-            isset($this->checkout['discount']) && !empty($this->checkout['discount']) &&
-            isset($this->checkout['coupon_code']) && !empty($this->checkout['coupon_code']) &&
-            $this->checkout['discount'] > 0 && WC()->session->chosen_payment_method == 'woo-mercado-pago-custom'
-        ) {
-            $this->preference['additional_info']['items'][] = $this->add_discounts();
-        }
-        $this->add_discounts_campaign();
 
         $internal_metadata = parent::get_internal_metadata();
-        $internal_metadata = $this->get_internal_metadata_custom($internal_metadata);
-        $this->preference['metadata'] = $internal_metadata;
+		$merge_array = array_merge($internal_metadata, $this->get_internal_metadata_custom());
+        $this->preference['metadata'] = $merge_array;
 
     }
 
@@ -102,7 +87,7 @@ class WC_WooMercadoPago_PreferenceCustom extends WC_WooMercadoPago_PreferenceAbs
 
         return $items;
     }
-  
+
     /**
      * @return array
      */
@@ -112,7 +97,7 @@ class WC_WooMercadoPago_PreferenceCustom extends WC_WooMercadoPago_PreferenceAbs
             "checkout" => "custom",
             "checkout_type" => "credit_cart",
         );
-      
+
         return $internal_metadata;
-    }   
+    }
 }
