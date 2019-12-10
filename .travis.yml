@@ -15,7 +15,7 @@ before_deploy:
     -f ${TRAVIS_BUILD_DIR}${REPO}-${BUILD_ENV}-${TRAVIS_BUILD_NUMBER}.tar.gz *
 script:
   - |
-    Skipping phpunit
+    echo skiping phpunit
 deploy:
   draft: true
   provider: releases
