@@ -22,15 +22,5 @@ if ( ! defined( 'WP_MP_PAP_NOTICES_BASENAME' ) ) {
     define( 'WP_MP_PAP_NOTICES_BASENAME', plugin_basename(__FILE__));
 }
 
-/*
-add_action('admin_notices', function() {
-    ?>
-    <div class="notice notice-success is-dismissible">
-        <p>Hello darkness, my old friend!</p>
-    </div>
-    <?php
-});
-*/
-
 require(__DIR__ . '/LTucilloApp.php');
 new LtucilloApp;

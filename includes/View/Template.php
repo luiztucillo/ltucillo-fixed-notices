@@ -30,6 +30,7 @@ abstract class Template
      */
     protected function fetchView($template)
     {
+        $template = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $template);
         $includeFilePath = __DIR__ . '/../../templates/' . $template . '.php';
 
         if (!file_exists($includeFilePath)) {
