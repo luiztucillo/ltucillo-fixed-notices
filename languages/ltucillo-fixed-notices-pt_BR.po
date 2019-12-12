@@ -1,0 +1,85 @@
+# Copyright (C) 2019 Luiz Tucillo
+# This file is distributed under the same license as the Fixed Notices plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: LTucillo Fixed Notices 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ltucillo-notices\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-12-12T17:42:24+00:00\n"
+"PO-Revision-Date: 2019-12-12 15:13-0300\n"
+"X-Generator: Poedit 2.2.4\n"
+"X-Domain: ltucillo-notices\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: pt_BR\n"
+
+#. Plugin Name of the plugin
+msgid "Fixed Notices"
+msgstr "Alertas Fixos"
+
+#. Plugin URI of the plugin
+msgid "https://github.com/luiztucillo/ltucillo-fixed-notices"
+msgstr ""
+
+#. Description of the plugin
+msgid "Put fixed notices in admin based on user groups"
+msgstr "Adicione alertas fixos no admin baseado no grupo dos usuários"
+
+#. Author of the plugin
+msgid "Luiz Tucillo"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://luiztucillo.com.br"
+msgstr ""
+
+msgid "Notice created successfully"
+msgstr "Alerta criado com sucesso"
+
+msgid "Error creating notice"
+msgstr "Erro ao criar alertas"
+
+msgid "Error removing notice"
+msgstr "Erro ao remover alerta"
+
+msgid "Notice removed successfully"
+msgstr "Alerta removido com sucesso"
+
+msgid "Add Fixed Notice"
+msgstr "Adicionar Alerta Fixo"
+
+msgid "success"
+msgstr "sucesso"
+
+msgid "warning"
+msgstr "aviso"
+
+msgid "info"
+msgstr "info"
+
+msgid "error"
+msgstr "erro"
+
+msgid "List Notices"
+msgstr "Listar Alertas"
+
+msgid "User Group"
+msgstr "Grupo de Usuário"
+
+msgid "User Groups"
+msgstr "Grupos de Usuário"
+
+msgid "Level"
+msgstr "Nível"
+
+msgid "Message"
+msgstr "Mensagem"
+
+msgid "Save Fixed Notice"
+msgstr "Salvar Alerta Fixo"
+
+msgid "Remove"
+msgstr "Remover"

@@ -22,7 +22,7 @@ class NoticeRemoveController
 
         if (!$notice) {
             Notices::createSessionMessage(Notices::LEVEL_ERROR, Translate::__('Error removing notice'));
-            wp_redirect(\LTucilloApp::getUrl('list'));
+            wp_redirect(\App::getUrl('list'));
             return;
         }
 
@@ -30,6 +30,6 @@ class NoticeRemoveController
 
         Notices::createSessionMessage(Notices::LEVEL_SUCCESS, Translate::__('Notice removed successfully'));
 
-        wp_redirect(\LTucilloApp::getUrl('list'));
+        wp_redirect(\App::getUrl('list'));
     }
 }

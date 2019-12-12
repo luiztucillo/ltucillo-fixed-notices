@@ -35,10 +35,10 @@ class NoticeCreateController
 
             Notices::createSessionMessage(Notices::LEVEL_SUCCESS, Translate::__('Notice created successfully'));
 
-            $url = \LTucilloApp::getUrl('list');
+            $url = \App::getUrl('list');
         } catch (\Exception $e) {
             Notices::createSessionMessage(Notices::LEVEL_ERROR, Translate::__('Error creating notice'));
-            $url = \LTucilloApp::getUrl('list', ['add_error' => true]);
+            $url = \App::getUrl('list', ['add_error' => true]);
         }
 
         wp_redirect($url);

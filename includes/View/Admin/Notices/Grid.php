@@ -48,7 +48,7 @@ class Grid extends Template
     protected function getRemoveUrl(Notice $notice)
     {
         $url = get_admin_url(null, 'admin-post.php')
-            . '?action=' . \LTucilloApp::ACTION_REMOVE . '&notice=' . $notice->getId();
+            . '?action=' . \App::ACTION_REMOVE . '&notice=' . $notice->getId();
 
         return esc_url($url);
     }

@@ -1,12 +1,12 @@
 <?php
 /**
- * Plugin Name: Fixed Notices
- * Plugin URI: https://github.com/luiztucillo/test-travis-svn
+ * Plugin Name: LTucillo Fixed Notices
+ * Plugin URI: https://github.com/luiztucillo/ltucillo-fixed-notices
  * Description: Put fixed notices in admin based on user groups
  * Version: 0.1.0
  * Author: Luiz Tucillo
  * Author URI: https://luiztucillo.com.br
- * Text Domain: ltucillo-notices
+ * Text Domain: ltucillo-fixed-notices
  *
  * @package LTucillo
  * @category Core
@@ -19,8 +19,9 @@ if (!defined('ABSPATH')) {
 }
 
 if ( ! defined( 'WP_MP_PAP_NOTICES_BASENAME' ) ) {
-    define( 'WP_MP_PAP_NOTICES_BASENAME', plugin_basename(__FILE__));
+    define('LTUCILLO_DIR', __DIR__);
+    define('WP_MP_PAP_NOTICES_BASENAME', plugin_basename(__FILE__));
 }
 
-require(__DIR__ . '/LTucilloApp.php');
-new LtucilloApp;
+require(__DIR__ . '/App.php');
+new App;

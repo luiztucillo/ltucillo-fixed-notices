@@ -21,7 +21,7 @@ use LTucillo\View\Admin\Notices\Grid;
         <th scope="col" id="user_groups" class="manage-column column-primary">
             <span><?php echo Translate::__('Message') ?></span>
         </th>
-        <th scope="col" id="user_groups" class="manage-column column-primary" width="50">
+        <th scope="col" id="user_groups" class="manage-column column-primary" width="150">
         </th>
     </tr>
     </thead>

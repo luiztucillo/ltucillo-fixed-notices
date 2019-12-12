@@ -23,11 +23,11 @@ class Admin
     {
         add_action('admin_menu', [$this, 'addPages']);
 
-        add_action('admin_post_' . \LTucilloApp::ACTION_ADD, function() {
+        add_action('admin_post_' . \App::ACTION_ADD, function() {
             new NoticeCreateController;
         });
 
-        add_action('admin_post_' . \LTucilloApp::ACTION_REMOVE, function() {
+        add_action('admin_post_' . \App::ACTION_REMOVE, function() {
             new NoticeRemoveController;
         });
 
@@ -36,6 +36,8 @@ class Admin
             if (!session_id()) {
                 session_start();
             }
+
+            Translate::init();
 
             $notices = new Notices;
             $notices->renderTemporaryMessages();
@@ -52,15 +54,15 @@ class Admin
             Translate::__('Fixed Notices'),
             Translate::__('Fixed Notices'),
             'edit_users',
-            \LTucilloApp::SLUG . '-list',
+            \App::SLUG . '-list',
             [new NoticeListController, 'execute']
         );
 
         add_users_page(
-            Translate::__('Fixed Notices Add'),
+            Translate::__('Add Fixed Notice'),
             null,
             'edit_users',
-            \LTucilloApp::SLUG . '-add',
+            \App::SLUG . '-add',
             function () {
                 echo new Form;
             }

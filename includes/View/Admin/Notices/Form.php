@@ -21,7 +21,7 @@ class Form extends Template
 
     protected function getBackUrl()
     {
-        return \LTucilloApp::getUrl('list');
+        return \App::getUrl('list');
     }
 
     /**

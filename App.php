@@ -1,12 +1,13 @@
 <?php
 
+use LTucillo\Helpers\Translate;
 use LTucillo\Model\Admin;
 use LTucillo\Model\Setup;
 
 /**
  * Class LTucillo
  */
-class LTucilloApp
+class App
 {
     /**
      *
@@ -96,7 +97,7 @@ class LTucilloApp
      */
     static public function getUrl($action, $params = [])
     {
-        $url = get_admin_url(null, 'users.php?page=' . \LTucilloApp::SLUG . '-' . $action);
+        $url = get_admin_url(null, 'users.php?page=' . App::SLUG . '-' . $action);
 
         if (!empty($params)) {
             foreach ($params as $k => $v) {

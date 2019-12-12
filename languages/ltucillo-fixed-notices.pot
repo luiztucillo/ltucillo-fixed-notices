@@ -1,0 +1,86 @@
+# Copyright (C) 2019 Luiz Tucillo
+# This file is distributed under the same license as the Fixed Notices plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: LTucillo Fixed Notices 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ltucillo-notices\n"
+"Last-Translator: Luiz Fernando Rodrigues Tucill0o <me@luiztucillo.com.br>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-12-12T17:42:24+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: ltucillo-notices\n"
+
+#. Plugin Name of the plugin
+msgid "Fixed Notices"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://github.com/luiztucillo/ltucillo-fixed-notices"
+msgstr ""
+
+#. Description of the plugin
+msgid "Put fixed notices in admin based on user groups"
+msgstr ""
+
+#. Author of the plugin
+msgid "Luiz Tucillo"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://luiztucillo.com.br"
+msgstr ""
+
+msgid "Notice created successfully"
+msgstr ""
+
+msgid "Error creating notice"
+msgstr ""
+
+msgid "Error removing notice"
+msgstr ""
+
+msgid "Notice removed successfully"
+msgstr ""
+
+msgid "Fixed Notices"
+msgstr ""
+
+msgid "Add Fixed Notice"
+msgstr ""
+
+msgid "success"
+msgstr ""
+
+msgid "warning"
+msgstr ""
+
+msgid "info"
+msgstr ""
+
+msgid "error"
+msgstr ""
+
+msgid "List Notices"
+msgstr ""
+
+msgid "User Group"
+msgstr ""
+
+msgid "User Groups"
+msgstr ""
+
+msgid "Level"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "Save Fixed Notice"
+msgstr ""
+
+msgid "Remove"
+msgstr ""

@@ -5,11 +5,11 @@ use LTucillo\Model\HtmlOption;
 use LTucillo\Model\Notices;
 use LTucillo\View\Admin\Notices\Form; ?>
 <div class="wrap">
-    <h1 class="wp-heading-inline"><?php echo Translate::__('Add Notices') ?></h1>
+    <h1 class="wp-heading-inline"><?php echo Translate::__('Add Fixed Notice') ?></h1>
     <a href="<?php echo $this->getBackUrl() ?>" class="page-title-action"><?php echo Translate::__('List Notices') ?></a>
     <hr class="wp-header-end">
     <form name="save-fixed-notice" action="<?php echo $this->getFormAction() ?>" method="post">
-        <input type="hidden" name="action" value="<?Php echo LTucilloApp::ACTION_ADD ?>"/>
+        <input type="hidden" name="action" value="<?Php echo App::ACTION_ADD ?>"/>
         <table class="form-table" role="presentation">
             <tbody>
             <tr>
@@ -28,7 +28,7 @@ use LTucillo\View\Admin\Notices\Form; ?>
                 </td>
             </tr>
             <tr>
-                <th scope="row"><label for="notice-level"><?php echo Translate::__('Notice Level') ?></label></th>
+                <th scope="row"><label for="notice-level"><?php echo Translate::__('Level') ?></label></th>
                 <td>
                     <select id="notice-level" name="notice-level">
                         <option value="<?php echo Notices::LEVEL_SUCCESS ?>"><?php echo Notices::LEVEL_SUCCESS ?></option>
