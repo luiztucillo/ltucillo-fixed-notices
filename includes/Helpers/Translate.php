@@ -12,7 +12,8 @@ class Translate
 
     static public function init()
     {
-        load_plugin_textdomain(self::TEXT_DOMAIN, false, self::TEXT_DOMAIN . '/languages/');
+        $dir = explode(DIRECTORY_SEPARATOR, trim(str_replace(WP_PLUGIN_DIR, '', __DIR__), DIRECTORY_SEPARATOR));
+        load_plugin_textdomain(self::TEXT_DOMAIN, false,  current($dir) . DIRECTORY_SEPARATOR . 'languages');
     }
 
     /**
