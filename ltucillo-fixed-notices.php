@@ -18,10 +18,13 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-if ( ! defined( 'WP_MP_PAP_NOTICES_BASENAME' ) ) {
-    define('LTUCILLO_DIR', __DIR__);
-    define('WP_MP_PAP_NOTICES_BASENAME', plugin_basename(__FILE__));
+if (!defined('LTUCILLO_FIXED_NOTICES_DIR')) {
+    define('LTUCILLO_FIXED_NOTICES_DIR', __DIR__);
 }
 
-require(__DIR__ . '/App.php');
-new App;
+require __DIR__ . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'App.php';
+new LTucillo\App;
+
+if (is_admin() || (defined('WP_CLI') && WP_CLI)) {
+    add_action('init', [new \LTucillo\Model\Admin, 'init']);
+}

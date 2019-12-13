@@ -2,6 +2,7 @@
 
 namespace LTucillo\Model;
 
+use LTucillo\App;
 use LTucillo\Controllers\NoticeCreateController;
 use LTucillo\Controllers\NoticeListController;
 use LTucillo\Controllers\NoticeRemoveController;
@@ -9,6 +10,7 @@ use LTucillo\Helpers\Translate;
 use LTucillo\View\Admin\Notices\Form;
 use LTucillo\View\Messages\ErrorMessage;
 use LTucillo\View\Messages\SuccessMessage;
+use LTucillo\View\UpdateMessages;
 
 /**
  * Class Admin
@@ -19,29 +21,30 @@ class Admin
     /**
      * Menu constructor.
      */
-    public function __construct()
+    public function init()
     {
+        if (!session_id()) {
+            session_start();
+        }
+
+        Translate::init();
+        (new Update)->check();
+
+        $notices = new Notices;
+        $notices->renderTemporaryMessages();
+        $notices->renderFixedMessages();
+
+        // Wordpress native hook to add itens to menu
         add_action('admin_menu', [$this, 'addPages']);
 
-        add_action('admin_post_' . \App::ACTION_ADD, function() {
+        //wordpress native hook to trigger function on form submit
+        add_action('admin_post_' . \LTucillo\App::ACTION_ADD, function () {
             new NoticeCreateController;
         });
 
-        add_action('admin_post_' . \App::ACTION_REMOVE, function() {
+        //wordpress native hook to trigger function on form submit
+        add_action('admin_post_' . \LTucillo\App::ACTION_REMOVE, function () {
             new NoticeRemoveController;
-        });
-
-        add_action('init', function() {
-
-            if (!session_id()) {
-                session_start();
-            }
-
-            Translate::init();
-
-            $notices = new Notices;
-            $notices->renderTemporaryMessages();
-            $notices->renderFixedMessages();
         });
     }
 
@@ -54,7 +57,7 @@ class Admin
             Translate::__('Fixed Notices'),
             Translate::__('Fixed Notices'),
             'edit_users',
-            \App::SLUG . '-list',
+            \LTucillo\App::SLUG . '-list',
             [new NoticeListController, 'execute']
         );
 
@@ -62,7 +65,7 @@ class Admin
             Translate::__('Add Fixed Notice'),
             null,
             'edit_users',
-            \App::SLUG . '-add',
+            \LTucillo\App::SLUG . '-add',
             function () {
                 echo new Form;
             }

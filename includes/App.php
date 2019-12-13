@@ -1,5 +1,7 @@
 <?php
 
+namespace LTucillo;
+
 use LTucillo\Helpers\Translate;
 use LTucillo\Model\Admin;
 use LTucillo\Model\Setup;
@@ -20,7 +22,7 @@ class App
     /**
      *
      */
-    const ACTION_ADD    = 'fixed_notices_add_action';
+    const ACTION_ADD = 'fixed_notices_add_action';
     /**
      *
      */
@@ -31,20 +33,6 @@ class App
     static private $version;
 
     /**
-     * App constructor.
-     */
-    public function __construct()
-    {
-        try {
-            spl_autoload_register([$this, 'autoload']);
-        } catch (Exception $e) {
-            return false;
-        }
-
-        $this->init();
-    }
-
-    /**
      * @param $className
      */
     private function autoload($className)
@@ -53,7 +41,7 @@ class App
             return;
         }
 
-        $file = __DIR__ . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR
+        $file = __DIR__ . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR
             . str_replace([self::PREFIX . '\\', '\\'], ['', DIRECTORY_SEPARATOR], $className)
             . '.php';
 
@@ -62,10 +50,13 @@ class App
         }
     }
 
-    private function init()
+    /**
+     * @throws \Exception
+     */
+    public function __construct()
     {
+        spl_autoload_register([$this, 'autoload']);
         new Setup;
-        new Admin;
     }
 
     /**
@@ -106,5 +97,29 @@ class App
         }
 
         return $url;
+    }
+
+    /**
+     * @param bool $base
+     * @return array|string
+     */
+    static public function getPluginDir($base = true)
+    {
+        $dir = LTUCILLO_FIXED_NOTICES_DIR;
+        return $base
+            ? current(explode(DIRECTORY_SEPARATOR, trim(str_replace(WP_PLUGIN_DIR, '', $dir), DIRECTORY_SEPARATOR)))
+            : $dir;
+    }
+
+    /**
+     * @param bool $base
+     * @return string
+     */
+    static public function getPluginFile($base = true)
+    {
+        $file  = 'ltucillo-fixed-notices.php';
+        return $base
+            ? $file
+            : self::getPluginDir(false) . DIRECTORY_SEPARATOR . $file;
     }
 }

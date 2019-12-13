@@ -38,7 +38,7 @@ class Notices extends Template
      */
     protected function getAddUrl()
     {
-        return \App::getUrl('add');
+        return \LTucillo\App::getUrl('add');
     }
 
     /**

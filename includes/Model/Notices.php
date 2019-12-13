@@ -22,7 +22,7 @@ class Notices
      */
     static public function createSessionMessage($level, $message)
     {
-        $_SESSION[\App::SLUG][$level][] = $message;
+        $_SESSION[\LTucillo\App::SLUG][$level][] = $message;
     }
 
     /**
@@ -44,8 +44,8 @@ class Notices
      */
     public function renderTemporaryMessages()
     {
-        $messages = $_SESSION[\App::SLUG];
-        unset($_SESSION[\App::SLUG]);
+        $messages = $_SESSION[\LTucillo\App::SLUG];
+        unset($_SESSION[\LTucillo\App::SLUG]);
 
         if (!$messages) {
             return;

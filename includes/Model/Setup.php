@@ -16,7 +16,7 @@ class Setup
 
     private function install()
     {
-        $v = \App::version();
+        $v = \LTucillo\App::version();
         $dbVersion = get_option('ltucillo_notices_db_version', '0');
 
         if ($dbVersion == $v) {
