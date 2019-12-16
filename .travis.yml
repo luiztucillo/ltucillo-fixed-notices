@@ -3,8 +3,8 @@ before_deploy:
 - |
   chmod +x scripts/pre-release.sh \
   && chmod +x scripts/pack.sh \
-  && chmod +x scripts/svn.sh
-  && bash pre-release.sh
+  && chmod +x scripts/svn.sh \
+  && bash pre-release.sh \
   && bash pack.sh
 
 script:
