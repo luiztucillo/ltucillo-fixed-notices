@@ -3,7 +3,7 @@
  * Plugin Name: LTucillo Fixed Notices
  * Plugin URI: https://github.com/luiztucillo/ltucillo-fixed-notices
  * Description: Put fixed notices in admin based on user groups
- * Version: 0.1.1
+ * Version: 0.1.2
  * Author: Luiz Tucillo
  * Author URI: https://luiztucillo.com.br
  * Text Domain: ltucillo-fixed-notices
