@@ -7,13 +7,11 @@ cd release_dir/trunk || exit
 printf '\n\nTrying to add new files...\n'
 svn stat | grep \? | awk '{print $2}' | xargs svn add
 printf '\n\nTrying to check-in changes...\n'
-printf $TRAVIS_COMMIT_MESSAGE
-printf '\n\n'
-svn ci --non-interactive --username $SVN_USERNAME --password $SVN_PASSWORD -m '$TRAVIS_COMMIT_MESSAGE'
-cd ../../ || exit \
-  && rm -rf release_dir
+svn ci --non-interactive --username $SVN_USERNAME --password $SVN_PASSWORD -m "$TRAVIS_COMMIT_MESSAGE"
+cd ../../ || exit
 printf '\n\nDelete tag if already exists...\n'
 svn rm --non-interactive --username $SVN_USERNAME --password $SVN_PASSWORD \
+  -m "Remove tag $VERSION to override" \
   https://plugins.svn.wordpress.org/ltucillo-fixed-notices/tags/$VERSION
 printf '\n\nCopy trunk to tag\n'
 svn cp --non-interactive --username $SVN_USERNAME --password $SVN_PASSWORD \
