@@ -1,6 +1,13 @@
 #!/bin/bash
+FILENAME=$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER.tar.gz
+tar \
+  --exclude=.travis.yml \
+  --exclude=README.md \
+  --exclude=scripts \
+  -cvf $FILENAME
+
 mkdir pre_release
-cp -r * pre_release
-rm -rf pre_release/.travis.yml \
-       pre_release/README.md \
-       pre_release/scripts
+cp $FILENAME pre_release
+cd pre_release || exit
+tar -xzf $FILENAME
+rm $FILENAME
