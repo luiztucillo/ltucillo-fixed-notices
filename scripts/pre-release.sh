@@ -1,7 +1,6 @@
 #!/bin/bash
 mkdir pre_release
-cp -r includes pre_release \
-  && cp -r languages pre_release \
-  && cp -r templates pre_release \
-  && cp ltucillo-fixed-notices.php pre_release \
-  && cp readme.txt pre_release
+cp -r * pre_release
+rm -rf pre_release/.travis.yml \
+       pre_release/README.md \
+       pre_release/scripts
