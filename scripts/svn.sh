@@ -2,6 +2,7 @@
 VERSION=$(grep -E -o 'Version: ([0-9.]+)' ltucillo-fixed-notices.php | grep -E -o '([0-9.]+)')
 mkdir release_dir
 svn co https://plugins.svn.wordpress.org/ltucillo-fixed-notices release_dir
+ls -la
 cp -r pre_release/* release_dir
 cd release_dir/trunk || exit
 svn stat | grep \? | awk '{print $2}' | xargs svn add
