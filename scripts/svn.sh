@@ -4,6 +4,10 @@ mkdir release_dir
 svn co https://plugins.svn.wordpress.org/ltucillo-fixed-notices release_dir
 cp -r pre_release/* release_dir/trunk
 cd release_dir/trunk || exit
+OLD_VERSION=$(grep -E -o 'Version: ([0-9.]+)' ltucillo-fixed-notices.php | grep -E -o '([0-9.]+)')
+echo $VERSION
+echo $OLD_VERSION
+exit 1
 printf '\n\nTrying to add new files...\n'
 svn stat | grep \? | awk '{print $2}' | xargs svn add
 printf '\n\nTrying to check-in changes...\n'
