@@ -4,8 +4,7 @@ before_deploy:
   chmod +x scripts/pre-release.sh \
   && chmod +x scripts/pack.sh \
   && chmod +x scripts/svn.sh \
-  && bash scripts/pre-release.sh \
-  && bash scripts/pack.sh
+  && bash scripts/pre-release.sh
 
 script:
   - echo skiping phpunit
