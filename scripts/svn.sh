@@ -9,6 +9,7 @@ if [ $VERSION == $OLD_VERSION ]; then
   exit 1;
 fi
 
+ls -la
 cp -r pre_release/* release_dir/trunk
 cd release_dir/trunk || exit
 
