@@ -1,5 +1,5 @@
 #!/bin/bash
-FILENAME=teste.tar.gz
+FILENAME=${TRAVIS_BRANCH}-${TRAVIS_BUILD_NUMBER}.tar.gz
 tar \
   --exclude=.travis.yml \
   --exclude=README.md \
@@ -10,5 +10,4 @@ mkdir pre_release
 cp $FILENAME pre_release
 cd pre_release || exit
 tar -xzf $FILENAME
-ls -la
 rm $FILENAME
