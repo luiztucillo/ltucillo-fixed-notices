@@ -7,7 +7,8 @@ cd release_dir/trunk || exit
 printf '\n\nTrying to add new files...\n'
 svn stat | grep \? | awk '{print $2}' | xargs svn add
 printf '\n\nTrying to check-in changes...\n'
-svn stat
+printf $TRAVIS_COMMIT_MESSAGE
+printf '\n\n'
 svn ci --non-interactive --username $SVN_USERNAME --password $SVN_PASSWORD -m $TRAVIS_COMMIT_MESSAGE
 cd ../../ || exit \
   && rm -rf release_dir
