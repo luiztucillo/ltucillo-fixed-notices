@@ -4,7 +4,7 @@ tar \
   --exclude=.travis.yml \
   --exclude=README.md \
   --exclude=scripts \
-  -cvf $FILENAME
+  -cvf $FILENAME *
 
 mkdir pre_release
 cp $FILENAME pre_release
