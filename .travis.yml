@@ -1,8 +1,7 @@
 language: php
 before_deploy:
 - |
-  FILENAME=${TRAVIS_BRANCH}-${TRAVIS_BUILD_NUMBER}.tar.gz \
-  && chmod +x scripts/pre-release.sh \
+  chmod +x scripts/pre-release.sh \
   && chmod +x scripts/svn.sh \
   && bash scripts/pre-release.sh
 

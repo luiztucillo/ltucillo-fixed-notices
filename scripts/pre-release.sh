@@ -1,4 +1,6 @@
 #!/bin/bash
+FILENAME=${TRAVIS_BRANCH}-${TRAVIS_BUILD_NUMBER}.tar.gz
+
 tar \
   --exclude=.travis.yml \
   --exclude=README.md \
