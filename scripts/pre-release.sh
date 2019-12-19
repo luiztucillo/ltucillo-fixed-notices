@@ -11,3 +11,5 @@ cp $FILENAME pre_release
 cd pre_release || exit
 tar -xzf $FILENAME
 rm $FILENAME
+printf '\nPRE RELEASE FOLDER\n'
+ls -la
