@@ -9,11 +9,11 @@ if [ $VERSION == $OLD_VERSION ]; then
   exit 1;
 fi
 
-pwd
-ls -la
-ls -la pre_release
-cp -r pre_release/* release_dir/trunk
+cp -r $FILENAME release_dir/trunk
 cd release_dir/trunk || exit
+ls -la
+tar -xzf $FILENAME
+rm $FILENAME
 
 printf '\n\nTrying to add new files...\n'
 svn stat | grep \? | awk '{print $2}' | xargs svn add
